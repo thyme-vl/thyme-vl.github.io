@@ -1,4 +1,4 @@
-// Flexible Case Renderer
+// Flexible Case Renderer with Math and Table Support
 class FlexibleCaseRenderer {
     constructor() {
         this.renderers = {
@@ -9,6 +9,42 @@ class FlexibleCaseRenderer {
             'generated_images': this.renderGeneratedImages.bind(this),
             'answer': this.renderAnswer.bind(this)
         };
+        
+        // Initialize MathJax if not already loaded
+        this.initMathJax();
+    }
+
+    initMathJax() {
+        // Check if MathJax is already loaded
+        if (window.MathJax) {
+            return;
+        }
+
+        // Configure MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+
+        // Load MathJax script
+        const script = document.createElement('script');
+        script.src = 'https://polyfill.io/v3/polyfill.min.js?features=es6';
+        document.head.appendChild(script);
+
+        const mathJaxScript = document.createElement('script');
+        mathJaxScript.id = 'MathJax-script';
+        mathJaxScript.async = true;
+        mathJaxScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        document.head.appendChild(mathJaxScript);
     }
 
     renderCase(caseData) {
@@ -39,6 +75,14 @@ class FlexibleCaseRenderer {
         });
         
         html += '</div>';
+        
+        // Re-render MathJax after content is added
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }, 100);
+        
         return html;
     }
 
@@ -79,7 +123,9 @@ class FlexibleCaseRenderer {
             <div class="section image-section">
                 <div class="image-container">
                     <img src="${data.src}" alt="${data.caption || 'Image'}" 
-                         ${data.width ? `style="max-width: ${data.width}px; width: 100%;"` : ''}>
+                        class="zoomable-image"
+                        ${data.width ? `style="max-width: ${data.width}px; width: 100%;"` : ''}
+                        onclick="openImageViewer('${data.src}', '${data.caption || 'Image'}')">
                     ${data.caption ? `<p class="image-caption">${data.caption}</p>` : ''}
                 </div>
             </div>
@@ -87,23 +133,24 @@ class FlexibleCaseRenderer {
     }
 
     renderQuestion(data) {
+        const processedText = this.processTextWithMathAndTables(data.text);
         return `
             <div class="section question-section">
                 <h3 class="section-title">❓User Prompt</h3>
-                <div class="question-box">
-                    ${this.formatText(data.text)}
+                <div class="question-box tex2jax_process">
+                    ${processedText}
                 </div>
             </div>
         `;
     }
 
     renderThinking(data, includeTitle = true) {
-        const formattedText = data.text.trim().replace(/\n/g, '<br>');
+        const processedText = this.processTextWithMathAndTables(data.text);
         
         return `
             <div class="section thinking-section">
                 ${includeTitle ? '<h3 class="section-title">🤔Thinking Process</h3>' : ''}
-                <div class="thinking-process">${formattedText}</div>
+                <div class="thinking-process tex2jax_process">${processedText}</div>
             </div>
         `;
     }
@@ -125,7 +172,6 @@ class FlexibleCaseRenderer {
             return '';
         }
 
-        // const title = data.title || "💡Generated Results";
         const title = "💡Generated Results";
 
         let html = `
@@ -141,6 +187,8 @@ class FlexibleCaseRenderer {
                     <div class="result-image">
                         <img src="${img.src}" 
                             alt="${img.caption || "💡Generated image"}"
+                            class="zoomable-image"
+                            onclick="openImageViewer('${img.src}', '${img.caption || 'Generated image'}')"
                             ${img.width ? `style="max-width: ${img.width}px; width: 100%;"` : ''}>
                         ${img.caption ? `<p class="result-image-caption">${img.caption}</p>` : ''}
                     </div>
@@ -148,12 +196,12 @@ class FlexibleCaseRenderer {
             });
         }
 
-        // Process text/digits results
         if (data.results) {
             data.results.forEach(result => {
+                const processedValue = this.processTextWithMathAndTables(result.value);
                 html += `
                     <div class="result-item">
-                        <pre class="code-block"><code>${this.escapeHtml(result.value)}</code></pre>
+                        <div class="code-block tex2jax_process">${processedValue}</div>
                         ${result.caption ? `<p class="result-image-caption">${result.caption}</p>` : ''}
                     </div>
                 `;
@@ -169,14 +217,110 @@ class FlexibleCaseRenderer {
     }
 
     renderAnswer(data) {
+        const processedText = this.processTextWithMathAndTables(data.text);
         return `
             <div class="section answer-section">
                 <h3 class="section-title">✅Final Answer</h3>
                 <div class="answer-container">
-                    <div class="answer-box">${this.escapeHtml(data.text)}</div>
+                    <div class="answer-box tex2jax_process">${processedText}</div>
                 </div>
             </div>
         `;
+    }
+
+    // Process text with math expressions and tables
+    processTextWithMathAndTables(text) {
+        if (!text) return '';
+        
+        // First process LaTeX tables
+        let processedText = this.processLatexTables(text);
+        
+        // Then format the text (preserving math expressions)
+        processedText = this.formatTextWithMath(processedText);
+        
+        return processedText;
+    }
+
+    // Process LaTeX tables and convert them to HTML
+    processLatexTables(text) {
+        // Match LaTeX table environments
+        const tableRegex = /\\begin{center}\s*\\begin{tabular}\{([^}]+)\}([\s\S]*?)\\end{tabular}\s*\\end{center}/g;
+        
+        return text.replace(tableRegex, (match, columnDef, tableContent) => {
+            return this.convertLatexTableToHtml(columnDef, tableContent);
+        });
+    }
+
+    convertLatexTableToHtml(columnDef, tableContent) {
+        // Parse column definition (e.g., "|c|c|" -> 2 columns with borders)
+        const columns = columnDef.match(/[lcr]/g) || [];
+        const hasBorders = columnDef.includes('|');
+        
+        // Split table content into rows
+        const rows = tableContent.split('\\\\').map(row => row.trim()).filter(row => row);
+        
+        let html = `<table class="latex-table ${hasBorders ? 'bordered' : ''}">`;
+        
+        rows.forEach((row, rowIndex) => {
+            if (row === '\\hline') return; // Skip hline commands
+            
+            // Split row into cells, handling escaped &
+            const cells = row.split('&').map(cell => cell.trim());
+            
+            // Determine if this is a header row (contains \textbf)
+            const isHeader = row.includes('\\textbf');
+            const tag = isHeader ? 'th' : 'td';
+            
+            html += '<tr>';
+            cells.forEach((cell, cellIndex) => {
+                if (cellIndex < columns.length) {
+                    // Process cell content (remove LaTeX formatting)
+                    let processedCell = cell
+                        .replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>')
+                        .replace(/\\hline/g, '')
+                        .trim();
+                    
+                    html += `<${tag}>${processedCell}</${tag}>`;
+                }
+            });
+            html += '</tr>';
+        });
+        
+        html += '</table>';
+        return html;
+    }
+
+    // Format text while preserving math expressions
+    formatTextWithMath(text) {
+        if (!text) return '';
+        
+        // Split text by math delimiters while preserving them
+        const parts = [];
+        let current = text;
+        let inMath = false;
+        let result = '';
+        
+        // Simple approach: just replace newlines with <br> but preserve math
+        const lines = text.split('\n');
+        const processedLines = [];
+        
+        for (let line of lines) {
+            if (line.trim() === '') {
+                processedLines.push('');
+            } else {
+                processedLines.push(line);
+            }
+        }
+        
+        // Remove empty lines at start and end
+        while (processedLines.length > 0 && processedLines[0].trim() === '') {
+            processedLines.shift();
+        }
+        while (processedLines.length > 0 && processedLines[processedLines.length - 1].trim() === '') {
+            processedLines.pop();
+        }
+        
+        return processedLines.join('<br>');
     }
 
     escapeHtml(text) {

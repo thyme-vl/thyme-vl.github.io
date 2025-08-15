@@ -2,59 +2,26 @@
   "cases": [
     {
       "id": 1,
-      "title": "Geometric QA",
-      "description": "No code generation",
+      "title": "Cropping & Zooming: Case 1",
+      "description": "Locate small object",
       "sections": [
         {
           "type": "image",
           "data": {
-            "src": "static/images/case1-1.png",
-            "width": 224
+            "src": "static/images/cases/case1-1.jpg",
+            "height": 450
           }
         },
         {
           "type": "question",
           "data": {
-            "text": "Elucidate the elements visible in the diagram."
+            "text": "What street is indicated by the sign on the pole near the center bottom of the image?\nOptions:\nA. MACHIGAN\nB. MACHLGUN\nC. MICHIGUN\nD. MICHIGAN\nPlease select the correct answer from the options above."
           }
         },
         {
           "type": "thinking",
           "data": {
-            "text": "The image provided is clear, with sufficient resolution and contrast to analyze its elements. The diagram shows a geometric figure consisting of a triangle ( triangle ABC ) with a point ( D ) on side ( BC ). A line segment ( AD ) is drawn from vertex ( A ) to point ( D ), and another line segment ( BE ) extends from vertex ( B ) to a point ( E ) outside the triangle. The elements visible in the diagram include:\n\n1. Triangle ( triangle ABC ).\n2. Point ( D ) on side ( BC ).\n3. Line segment ( AD ) connecting vertex ( A ) to point ( D ).\n4. Line segment ( BE ) extending from vertex ( B ) to point ( E ) outside the triangle.\n\nThe image is simple and does not require further processing to identify and describe the elements. Therefore, no additional image processing is necessary.",
-            "round": 1
-          }
-        },
-        {
-          "type": "answer",
-          "data": {
-            "text": "The diagram consists of a triangle ABC with vertices A, B, and C. Point D lies on the line segment BC, and point E lies on the extension of line segment BA. Line segment DE is parallel to line segment AC."
-          }
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Geometric Calculation",
-      "description": "Code: Arithmetics Calculation",
-      "sections": [
-        {
-          "type": "image",
-          "data": {
-            "src": "static/images/case8-1.png",
-            "width": 224
-          }
-        },
-        {
-          "type": "question",
-          "data": {
-            "text": "As shown in the figure, the vertex O of quadrilateral OABC is the origin of the coordinate system. With O as the center of similarity, quadrilateral OA1B1C1 is similar to quadrilateral OABC. If A(6,0) corresponds to A1(4,0), and the area of quadrilateral OABC is 27, then the area of quadrilateral OA1B1C1 is."
-          }
-        },
-        {
-          "type": "thinking",
-          "data": {
-            "text": "To solve this problem, we need to understand the concept of similarity and how it affects the scale of areas.\n\n1. **Similarity and Scale Factor**:\n   - The problem states that quadrilateral OA1B1C1 is similar to quadrilateral OABC, with O as the center of similarity.\n   - Similar figures have corresponding sides in proportion. The scale factor (k) is the ratio of the lengths of corresponding sides.\n\n2. **Finding the Scale Factor**:\n   - In the given coordinate system, A(6, 0) corresponds to A1(4, 0).\n   - The coordinate (6, 0) has been scaled to (4, 0). Since these are on the x-axis, the scaling only affects the x-coordinate.\n   - The scale factor, k, is given by the ratio of the coordinates:",
+            "text": "The task involves identifying the street name indicated by the sign located near the center bottom of the image. The sign appears small and somewhat distant, making it challenging to read clearly without zooming in. Cropping and zooming in on this specific region will enhance the visibility of the text on the sign, allowing for accurate identification of the street name. The sign is positioned near the lower part of the image, slightly to the right of the center. By cropping this area, we can focus on the sign and improve its readability. The coordinates for cropping can be estimated based on the sign's position relative to the entire image. Here is the Python code to crop and zoom in on the relevant section:",
             "round": 1
           }
         },
@@ -62,90 +29,7 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "# Calculate the scale factor\nk_numerator = 4\nk_denominator = 6\nk = k_numerator / k_denominator\nprint(k)"
-          }
-        },
-        {
-          "type": "generated_images",
-          "data": {
-            "title": "Calculation Results",
-            "results": [
-              {
-                "value": "0.6666666666666666"
-              }
-            ]
-          }
-        },
-        {
-          "type": "thinking",
-          "data": {
-            "text": "So, ( k = \\frac{4}{6} = \\frac{2}{3} ).\n\n3. **Effect of Scale Factor on Area**:\n   - The area of a figure that is scaled by a factor of k is scaled by ( k^2 ).\n   - This means the area of OA1B1C1 is ( k^2 \\times ) (area of OABC).\n\n4. **Calculate the New Area**:\n   - We know the area of OABC is 27.\n   - Therefore, the area of OA1B1C1 will be:",
-            "round": 2
-          }
-        },
-        {
-          "type": "code",
-          "data": {
-            "language": "python",
-            "code": "# Calculate the new area\nk_numerator = 2\nk_denominator = 3\nk = k_numerator / k_denominator\noriginal_area = 27\nnew_area = (k**2) * original_area\nprint(new_area)"
-          }
-        },
-        {
-          "type": "generated_images",
-          "data": {
-            "title": "Calculation Results",
-            "results": [
-              {
-                "value": "12.0"
-              }
-            ]
-          }
-        },
-        {
-          "type": "thinking",
-          "data": {
-            "text": "\\frac{2}{3} \\right)^2 \\times 27 = \\frac{4}{9} \\times 27 = 12\nThus, the area of quadrilateral OA1B1C1 is 12.",
-            "round": 3
-          }
-        },
-        {
-          "type": "answer",
-          "data": {
-            "text": "12"
-          }
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Real-World Thyme Data: Case 1",
-      "description": "Code: Image Cropping",
-      "sections": [
-        {
-          "type": "image",
-          "data": {
-            "src": "static/images/case3-1.png",
-            "width": 550
-          }
-        },
-        {
-          "type": "question",
-          "data": {
-            "text": "In figure (f), what does the parameter ( \\rho ) likely indicate? The choices are listed below:\nA. The resilience of the network to attacks\nB. The robustness of the network to disturbances\nC. The resistance of the network to noise\nD. The autocorrelation function of the network dynamics\nE. The radius of the neighborhood in which nodes interact"
-          }
-        },
-        {
-          "type": "thinking",
-          "data": {
-            "text": "To address the question regarding the parameter ( \\rho ) in figure (f), we need to examine the context and the graphical representation provided. Given the network terminology and the choices, I need to:\n\n1. Analyze the visual elements in figure (f)\n2. Consider what parameter \\rho typically represents in network contexts\n3. Look for clues in the graph's axes and patterns",
-            "round": 1
-          }
-        },
-        {
-          "type": "code",
-          "data": {
-            "language": "python",
-            "code": "import cv2\nimport numpy as np\nimport os\nimport random\n\n# Load the image\nimage_path = \"static/images/case3-1.png\"\nimage = cv2.imread(image_path)\n\n# Focus on figure (f) - bottom right\nheight, width = image.shape[:2]\ncrop_f = image[int(height*0.5):, int(width*0.5):]\n\n# Save the cropped image\noutput_path = \"static/images/case3-2.png\"\ncv2.imwrite(output_path, crop_f)\n\nprint(f\"Cropped figure (f) saved to {output_path}\")"
+            "code": "import os\nimport random\nfrom PIL import Image\n\n# Load the image\nimage_path = \"hr_bench_4k/179.jpg\"\nimage = Image.open(image_path)\n\n# Define the cropping coordinates (x1, y1, x2, y2)\n# These coordinates are estimated based on the sign's position in the image\nx1, y1, x2, y2 = 1550, 2650, 1850, 2750\n\n# Crop the image\ncropped_image = image.crop((x1, y1, x2, y2))\n\n# Apply a zoom factor (optional, depending on the required level of detail)\nzoom_factor = 2\nzoomed_image = cropped_image.resize((cropped_image.width * zoom_factor, cropped_image.height * zoom_factor))\n\n# Save the processed image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nprocessed_filename = f\"179_{random_suffix}.jpg\"\nprocessed_path = \"/mnt/data/temp_processed_images/\" + processed_filename\nzoomed_image.save(processed_path)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
           }
         },
         {
@@ -153,9 +37,8 @@
           "data": {
             "images": [
               {
-                "src": "static/images/case3-2.png",
-                "width": 300,
-                "caption": "Sub-image cropped from the original image - Figure (f)"
+                "src": "static/images/cases/case1-2.jpg",
+                "width": 300
               }
             ]
           }
@@ -163,28 +46,143 @@
         {
           "type": "thinking",
           "data": {
-            "text": "In figure (f), the parameter ( \\rho ) is located on the horizontal axis where there is a noticeable peak or prominent feature in the curve. The graph shows what appears to be an autocorrelation function, with \\( \\rho \\) representing the lag or correlation distance.\n\nThe curve starts at a high value when ( \\rho = 0 ) and decays as ( \\rho ) increases, which is characteristic of an autocorrelation function. This pattern indicates how the correlation between network states decreases with increasing time lag or distance.",
+            "text": "Upon examining the cropped and zoomed-in image, the sign clearly reads \"N MICHIGAN AV 100 E\". This confirms that the street indicated by the sign is Michigan Avenue.",
             "round": 2
           }
         },
         {
           "type": "answer",
           "data": {
-            "text": "D"
+            "text": "D. MICHIGAN"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Cropping & Zooming: Case 2",
+      "description": "Active visual search",
+      "sections": [
+        {
+          "type": "image",
+          "data": {
+            "src": "static/images/cases/case2-1.jpg",
+            "width": 850
+          }
+        },
+        {
+          "type": "question",
+          "data": {
+            "text": "What is the phone number listed on the building in the foreground?\nOptions:\nA. 206 441 5000\nB. 206 451 5000\nC. 206 444 5000\nD. 206 441 4000\nPlease select the correct answer from the options above."
+          }
+        },
+        {
+          "type": "thinking",
+          "data": {
+            "text": "The task involves identifying the phone number listed on a building in the foreground of the image. The number appears to be written vertically on a sign attached to a tall building. To accurately read the digits, it is necessary to zoom in on this specific area of the image. The sign is located on the left side of the building, near the center of the lower part of the image. Cropping and zooming in on this region will enhance the clarity of the text, making it easier to discern the correct digits. The coordinates for cropping are estimated based on the position of the sign relative to the entire image. The cropped area should focus on the vertical text on the building, which is approximately in the middle-left section of the image. This targeted cropping will isolate the relevant part of the image, improving readability. Here is the Python code to crop and zoom into the specified area:"
+          }
+        },
+        {
+          "type": "code",
+          "data": {
+            "language": "python",
+            "code": "import cv2\nimport os\nimport random\n\n# Load the image\nimage_path = \"hr_bench_4k/224.jpg\"\nimage = cv2.imread(image_path)\n\n# Define the cropping coordinates (x1, y1, x2, y2)\nx1, y1, x2, y2 = 1750, 1950, 1850, 2600\n\n# Crop the image\ncropped_image = image[y1:y2, x1:x2]\n\n# Apply zoom (resize the cropped image to enhance details)\nzoom_factor = 2\nzoomed_image = cv2.resize(cropped_image, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_CUBIC)\n\n# Save the processed image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nprocessed_filename = f\"224_{random_suffix}.jpg\"\nprocessed_path = \"/mnt/data/temp_processed_images/\" + processed_filename\ncv2.imwrite(processed_path, zoomed_image)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
+          }
+        },
+        {
+          "type": "generated_images",
+          "data": {
+            "images": [
+              {
+                "src": "static/images/cases/case2-2.jpg",
+                "width": 80
+              }
+            ]
+          }
+        },
+        {
+          "type": "thinking",
+          "data": {
+            "text": "Upon examining the cropped and zoomed-in image, the phone number listed on the building is clearly visible. The digits are arranged vertically, and they read \"206 441 5000\". This matches option A. The other options do not correspond to the digits shown on the building's sign.",
+            "round": 2
+          }
+        },
+        {
+          "type": "answer",
+          "data": {
+            "text": "A. 206 441 5000"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cropping & Zooming: Case 3",
+      "description": "Object counting",
+      "sections": [
+        {
+          "type": "image",
+          "data": {
+            "src": "static/images/cases/case3-1.jpg",
+            "width": 850
+          }
+        },
+        {
+          "type": "question",
+          "data": {
+            "text": "What is the number of awning-tricycles in the image?\nOptions:\nA. 78\nB. 72\nC. 43\nD. 63\nE. The image does not feature the awning-tricycles\nPlease select the correct answer from the options above."
+          }
+        },
+        {
+          "type": "thinking",
+          "data": {
+            "text": "To determine the number of awning-tricycles in the image, we need to carefully examine the entire scene. The awning-tricycles are likely small objects that might be difficult to spot due to their size relative to the overall image. Cropping and zooming in on specific regions where awning-tricycles might be present can help identify them more accurately. The awning-tricycles appear to be located near the lower part of the image, close to the road and possibly parked or moving along the street. By cropping and zooming in on this area, we can focus on the relevant details and count the awning-tricycles more precisely. Let me proceed with cropping and zooming in on the lower part of the image where awning-tricycles are likely to be found:",
+            "round": 1
+          }
+        },
+        {
+          "type": "code",
+          "data": {
+            "language": "python",
+            "code": "import os\nimport random\nfrom PIL import Image\n\n# Load the image\nimage_path = \"MME-RealWorld/10993.jpg\"\nimage = Image.open(image_path)\n\n# Define the coordinates for cropping (based on the inferred region)\nx1, y1, x2, y2 = 0, 1000, 1000, 1500  # Adjust these coordinates based on the image content\n\n# Crop the image\ncropped_image = image.crop((x1, y1, x2, y2))\n\n# Apply zoom (resizing the cropped image for better visibility)\nzoom_factor = 2\nzoomed_image = cropped_image.resize((cropped_image.width * zoom_factor, cropped_image.height * zoom_factor))\n\n# Save the processed image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nprocessed_filename = f\"10993_{random_suffix}.jpg\"\nprocessed_path = \"/mnt/data/temp_processed_images/\" + processed_filename\nzoomed_image.save(processed_path)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
+          }
+        },
+        {
+          "type": "generated_images",
+          "data": {
+            "images": [
+              {
+                "src": "static/images/cases/case3-2.jpg",
+                "width": 400
+              }
+            ]
+          }
+        },
+        {
+          "type": "thinking",
+          "data": {
+            "text": "Upon analyzing the cropped and zoomed-in image, it becomes clear that there are no awning-tricycles visible in the scene. The focus of the image is on a road with vehicles and buildings, and no such objects can be identified. Therefore, option E is correct as the image does not feature awning-tricycles.",
+            "round": 2
+          }
+        },
+        {
+          "type": "answer",
+          "data": {
+            "text": "E. The image does not feature the awning-tricycles"
           }
         }
       ]
     },
     {
       "id": 4,
-      "title": "Real-World Thyme Data: Case 2",
-      "description": "Code: Image Cropping",
+      "title": "Cropping & Zooming: Case 4",
+      "description": "OCR case",
       "sections": [
         {
           "type": "image",
           "data": {
-            "src": "static/images/case4-1.jpg",
-            "width": 550
+            "src": "static/images/cases/case4-1.jpg",
+            "width": 850
           }
         },
         {
@@ -204,7 +202,7 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "import cv2\nimport os\nimport numpy as np\nfrom uuid import uuid4\n\n# Load the image\nimage_path = \"case4-1.jpg\"\nimage = cv2.imread(image_path)\n\n# Define the coordinates for the license plate area (inferred from the image content)\nx1, y1, x2, y2 = 1250, 1030, 1360, 1070\n\n# Crop the image based on the defined coordinates\ncropped_image = image[y1:y2, x1:x2]\n\n# Apply a zoom factor to enhance the cropped region\nzoom_factor = 2\nresized_image = cv2.resize(cropped_image, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_CUBIC)\n\n# Save the processed image with a random suffix\nrandom_suffix = str(uuid4())[:8]\nprocessed_filename = f\"17127_{random_suffix}.jpg\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\ncv2.imwrite(processed_path, resized_image)\n\n# Print the path of the saved cropped image for further processing\nprint(processed_path)"
+            "code": "import cv2\nimport os\nimport numpy as np\nfrom uuid import uuid4\n\n# Load the image\nimage_path = \"MME-RealWorld-Lite/17127.jpg\"\nimage = cv2.imread(image_path)\n\n# Define the coordinates for the license plate area (inferred from the image content)\nx1, y1, x2, y2 = 1250, 1030, 1360, 1070\n\n# Crop the image based on the defined coordinates\ncropped_image = image[y1:y2, x1:x2]\n\n# Apply a zoom factor to enhance the cropped region\nzoom_factor = 2\nresized_image = cv2.resize(cropped_image, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_CUBIC)\n\n# Save the processed image with a random suffix\nrandom_suffix = str(uuid4())[:8]\nprocessed_filename = f\"17127_{random_suffix}.jpg\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\ncv2.imwrite(processed_path, resized_image)\n\n# Print the path of the saved cropped image for further processing\nprint(processed_path)"
           }
         },
         {
@@ -212,7 +210,7 @@
           "data": {
             "images": [
               {
-                "src": "static/images/case4-2.jpg",
+                "src": "static/images/cases/case4-2.jpg",
                 "width": 300
               }
             ]
@@ -241,20 +239,20 @@
         {
           "type": "image",
           "data": {
-            "src": "static/images/case6-1.png",
+            "src": "static/images/cases/case5-1.png",
             "width": 448
           }
         },
         {
           "type": "question",
           "data": {
-            "text": "What is the value of Oklahoma?"
+            "text": "Please write out the expression of the formula in the image using LaTeX format."
           }
         },
         {
           "type": "thinking",
           "data": {
-            "text": "The text in the image appears to be slanted and difficult to read in its current orientation. I believe rotating the image by a specific angle will help align the text properly and make it easier to interpret. Let me proceed with the rotation to improve clarity.",
+            "text": "The text in the image appears to be slanted and difficult to read in its current orientation. To improve clarity, rotating the image by a specific angle will help align the text properly and make it easier to interpret. Let me proceed with the rotation to enhance readability.",
             "round": 1
           }
         },
@@ -262,7 +260,7 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "import cv2\nimport numpy as np\nimport os\nfrom uuid import uuid4\n\n# Load the image\nimage_path = \"/mnt/data/temp_processed_images/cauldron_mapqa_images_mapqa_00027646.png_rotated_image_80.png\"\nimage = cv2.imread(image_path)\n\n# Define the rotation angle\nangle = -80  # Negative angle to rotate clockwise\n\n# Get image dimensions\nheight, width = image.shape[:2]\n\n# Calculate the rotation matrix\nrotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), angle, 1)\n\n# Perform the rotation\nrotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))\n\n# Save the rotated image with a random suffix\nrandom_suffix = str(uuid4())[:8]\nprocessed_filename = f\"cauldron_mapqa_images_mapqa_00027646.png_rotated_image_80_{random_suffix}.png\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\ncv2.imwrite(processed_path, rotated_image)\n\n# Print the saved image path\nprint(processed_path)"
+            "code": "import cv2\nimport numpy as np\nimport os\n\n# Load the image\nimage_path = \"OCR_55251.png\"\nimage = cv2.imread(image_path)\n\n# Define the rotation angle (in degrees)\nangle = 172  # The angle is derived from the filename suffix\n\n# Get the image dimensions\nheight, width = image.shape[:2]\n\n# Calculate the rotation matrix\nrotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), angle, 1)\n\n# Perform the rotation\nrotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))\n\n# Save the rotated image with a random suffix\nrandom_suffix = np.random.randint(100000, 999999)\nprocessed_path = f\"/mnt/data/temp_processed_images/OCR_55251_{random_suffix}.png\"\ncv2.imwrite(processed_path, rotated_image)\n\n# Print the saved image path\nprint(processed_path)"
           }
         },
         {
@@ -270,16 +268,23 @@
           "data": {
             "images": [
               {
-                "src": "static/images/case6-2.png",
+                "src": "static/images/cases/case5-2.png",
                 "width": 300
               }
             ]
           }
         },
         {
+          "type": "thinking",
+          "data": {
+            "text": "After rotating the image, the text becomes more legible. The formula in the image is a decimal number with a bar over the last digit, which typically indicates a repeating decimal. The number is 0.642857, with the last digit, 7, being repeated indefinitely. This can be represented in LaTeX format as 0.\\overline{642857}. The bar over the digits 642857 signifies that these digits repeat continuously. This notation is commonly used to represent repeating decimals in mathematical expressions.",
+            "round": 2
+          }
+        },
+        {
           "type": "answer",
           "data": {
-            "text": "1"
+            "text": "$$0.\\overline{642857}$$"
           }
         }
       ]
@@ -292,20 +297,20 @@
         {
           "type": "image",
           "data": {
-            "src": "static/images/case7-1.png",
+            "src": "static/images/cases/case6-1.jpg",
             "width": 448
           }
         },
         {
           "type": "question",
           "data": {
-            "text": "Convert the handwriting in this image to text."
+            "text": "what is written in the image? Please try to answer the question with short words or phrases if possible."
           }
         },
         {
           "type": "thinking",
           "data": {
-            "text": "The image appears to have low contrast, which may lead to poor text extraction in OCR. Enhancing the contrast will make the text stand out more clearly from the background, improving readability and OCR performance. Therefore, adjusting the contrast is necessary to improve the quality of the extracted text.\n\nHere is the Python code to enhance the image contrast:",
+            "text": "The image appears to have low contrast, which may lead to poor text extraction in OCR. The text \"communities\" is somewhat faint and blends into the background, making it challenging for OCR systems to accurately recognize the characters. Enhancing the contrast will make the text stand out more clearly from the background, improving readability and OCR performance. To address this, we can use Python with the PIL library to enhance the contrast of the image. Here is the code to do so:",
             "round": 1
           }
         },
@@ -313,7 +318,7 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "import os\nimport uuid\nfrom PIL import Image, ImageEnhance\n\n# Load the image\nimage_path = \"/mnt/data/llava_ov_data/img/f82363742380201d0848d51ce208b201.png\"\nimage = Image.open(image_path)\n\n# Enhance the contrast\nenhancer = ImageEnhance.Contrast(image)\nenhanced_image = enhancer.enhance(2.0)  # Increase contrast by a factor of 2\n\n# Save the enhanced image with a random suffix\nrandom_suffix = str(uuid.uuid4())[:8]\nfilename, ext = os.path.splitext(os.path.basename(image_path))\nprocessed_filename = f\"{filename}_{random_suffix}{ext}\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\nenhanced_image.save(processed_path)\n\n# Print the path of the saved enhanced image\nprint(processed_path)"
+            "code": "import os\nimport random\nfrom PIL import Image, ImageEnhance\n\n# Load the image\nimage_path = \"OCRBench/150.jpg\"\nimg = Image.open(image_path)\n\n# Enhance the contrast\nenhancer = ImageEnhance.Contrast(img)\nenhanced_img = enhancer.enhance(2.0)  # Increase contrast by a factor of 2\n\n# Save the enhanced image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nfilename, ext = os.path.splitext(os.path.basename(image_path))\nprocessed_filename = f\"{filename}_{random_suffix}{ext}\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\nenhanced_img.save(processed_path)\n\n# Print the path of the saved enhanced image\nprint(processed_path)"
           }
         },
         {
@@ -321,7 +326,7 @@
           "data": {
             "images": [
               {
-                "src": "static/images/case7-2.png",
+                "src": "static/images/cases/case6-2.jpg",
                 "width": 448
               }
             ]
@@ -330,40 +335,33 @@
         {
           "type": "thinking",
           "data": {
-            "text": "Upon examining the image, the text appears somewhat faint and may not be easily readable due to low contrast. To improve clarity, enhancing the contrast of the image would make the text stand out more prominently against the background. After applying such enhancements, the text becomes more legible, allowing for accurate extraction of the words inscribed in the image.",
+            "text": "Upon examining the original image, the text \"communities\" is faint and blends into the background. After applying the contrast enhancement, the text becomes significantly more legible. The enhanced image clearly shows the word \"communities,\" confirming that the enhancement process successfully improved the visibility of the text.",
             "round": 2
           }
         },
         {
           "type": "answer",
           "data": {
-            "text": "The words inscribed in the image are: \"No, but I mean-\""
+            "text": "communities"
           }
         }
       ]
     },
     {
       "id": 7,
-      "title": "Multi Step Reasoning: Case 1",
-      "description": "Self-correction",
+      "title": "Complex Calculations",
+      "description": "Code: Accurate math calculation",
       "sections": [
-        {
-          "type": "image",
-          "data": {
-            "src": "static/images/case9-1.png",
-            "width": 672
-          }
-        },
         {
           "type": "question",
           "data": {
-            "text": "Is the person holding the plate or just the pizza cutter?"
+            "text": "A chef aboard a luxury liner wants to cook a goose. The time $t$ in hours to cook a goose at $180^{\\circ}\\mathrm{C}$ depends on the mass of the goose $m$ in kilograms according to the formula $$ t = a m^{b} $$ where $a$ and $b$ are constants. The table below gives the times observed to cook a goose at $180^{\\circ}\\mathrm{C}$.\n\n\\begin{center}\n\\begin{tabular}{|c|c|}\n\\hline\n\\textbf{Mass, $m$ (kg)} & \\textbf{Time, $t$ (h)} \\\\\n\\hline\n3.00 & 2.75 \\\\\n6.00 & 3.75 \\\\\n\\hline\n\\end{tabular}\n\\end{center}\n\nUsing the data in the table, determine both $a$ and $b$ to two decimal places."
           }
         },
         {
           "type": "thinking",
           "data": {
-            "text": "To accurately determine whether the person is holding the plate or just the pizza cutter, it's essential to focus on the specific area of the image where the hands and objects are located. Cropping and zooming will help isolate these elements, making it easier to analyze the interaction between the hands and the objects.\n\nThe goal is to closely examine the hands and the objects they are interacting with. By cropping the region around the hands and the objects, we can enhance the visibility and focus on the relevant details.",
+            "text": "To find the constants \\(a\\) and \\(b\\) in the equation \\(t = a m^b\\), we need to use the given data points from the table. The data points are:\n1. \\(m_1 = 3.00 \\, \\text{kg}\\), \\(t_1 = 2.75 \\, \\text{h}\\)\n2. \\(m_2 = 6.00 \\, \\text{kg}\\), \\(t_2 = 3.75 \\, \\text{h}\\)\n\nWe can set up two equations based on these data points:\n1. \\(2.75 = a (3.00)^b\\)\n2. \\(3.75 = a (6.00)^b\\)\n\nWe can solve this system of equations for \\(a\\) and \\(b\\). Let's denote \\(x = a\\) and \\(y = b\\). Then the equations become:\n1. \\(2.75 = x (3.00)^y\\)\n2. \\(3.75 = x (6.00)^y\\)\n\nDividing the second equation by the first equation eliminates \\(x\\):\n\\[\n\\frac{3.75}{2.75} = \\frac{x (6.00)^y}{x (3.00)^y} = \\left(\\frac{6.00}{3.00}\\right)^y = 2^y\n\\]\n\nSo,\n\\[\n2^y = \\frac{3.75}{2.75} = \\frac{15}{11}\n\\]\n\nTaking the logarithm base 2 of both sides:\n\\[\ny = \\log_2 \\left(\\frac{15}{11}\\right)\n\\]\n\nUsing Python to compute this value:",
             "round": 1
           }
         },
@@ -371,16 +369,16 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "import cv2\nimport os\nimport random\n\n# Load the image\nimage_path = \"/mnt/data/llava_sft/coco2017/train2017/000000101766.jpg\"\nimage = cv2.imread(image_path)\n\n# Initial crop based on the inferred coordinates around the hands and objects\nx1, y1, x2, y2 = 407, 50, 617, 120\ncropped_image = image[y1:y2, x1:x2]\n\n# Save the cropped image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nfilename, ext = os.path.splitext(os.path.basename(image_path))\nprocessed_path = f\"/mnt/data/temp_processed_images/{filename}_{random_suffix}{ext}\"\ncv2.imwrite(processed_path, cropped_image)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
+            "code": "import math\n\n# Calculate y = log2(15/11)\ny_val = math.log2(15/11)\nprint(y_val)"
           }
         },
         {
           "type": "generated_images",
           "data": {
-            "images": [
+            "title": "Calculation Results",
+            "results": [
               {
-                "src": "static/images/case9-2.png",
-                "width": 448
+                "value": "0.44745897697122117"
               }
             ]
           }
@@ -388,7 +386,7 @@
         {
           "type": "thinking",
           "data": {
-            "text": "Upon reviewing the cropped image, it appears that the initial crop does not effectively capture the interaction between the hands and the objects. The cropped area seems to focus more on the upper part of the image, which does not include the plate or the pizza cutter. Therefore, a new set of coordinates is required to properly capture the hands and the objects they are interacting with.\n\nTo address this, let's refine the crop using the inferred coordinates that better encompass the hands and the objects. This will help us determine if the person is holding the plate or just the pizza cutter.",
+            "text": "So, \\(y \\approx 0.45\\).\n\nNow substitute \\(y = 0.45\\) back into one of the original equations to find \\(x\\). Using the first equation:\n\\begin{equation*}\n2.75 = x (3.00)^{0.45}; x = \\frac{2.75}{3.00^{0.45}}\n\\end{equation*}\n\nUsing Python to compute this value:",
             "round": 2
           }
         },
@@ -396,16 +394,16 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "# Load the image again\nimage = cv2.imread(image_path)\n\n# Refine the crop based on the inferred coordinates around the hands and objects\nx1, y1, x2, y2 = 142, 159, 450, 327\ncropped_image = image[y1:y2, x1:x2]\n\n# Save the refined cropped image with a new random suffix\nrandom_suffix = random.randint(1000, 9999)\nfilename, ext = os.path.splitext(os.path.basename(image_path))\nprocessed_path = f\"/mnt/data/temp_processed_images/{filename}_{random_suffix}{ext}\"\ncv2.imwrite(processed_path, cropped_image)\n\n# Print the path of the saved refined cropped image\nprint(processed_path)"
+            "code": "import math\n    \n# Calculate x = 2.75 / (3.00**0.45)\nx_val = 2.75 / (3.00**0.45)\nprint(x_val)"
           }
         },
         {
           "type": "generated_images",
           "data": {
-            "images": [
+            "title": "Calculation Results",
+            "results": [
               {
-                "src": "static/images/case9-3.png",
-                "width": 448
+                "value": "1.6773671336980667"
               }
             ]
           }
@@ -413,40 +411,73 @@
         {
           "type": "thinking",
           "data": {
-            "text": "After analyzing the refined cropped image, it is clear that the person is not holding the plate. The hands are positioned in a way that suggests they are using the pizza cutter to slice the pizza. The plate is stationary, and the person's hand is interacting with the pizza cutter, indicating that they are focused on cutting the pizza rather than holding the plate. Therefore, the person is holding just the pizza cutter.",
+            "text": "So, \\(x \\approx 1.68\\).\n\nTherefore, the constants are \\(a \\approx 1.68\\) and \\(b \\approx 0.45\\).",
             "round": 3
           }
         },
         {
           "type": "answer",
           "data": {
-            "text": "The person is holding both the pizza cutter and the plate with the pizza on it."
+            "text": "1.68, 0.45"
           }
         }
       ]
     },
     {
       "id": 8,
-      "title": "Multi Step Reasoning: Case 2",
-      "description": "Further Enhancement",
+      "title": "Failure Case 1",
+      "description": "No code invoked - Overconfidence",
       "sections": [
         {
           "type": "image",
           "data": {
-            "src": "static/images/case10-1.png",
-            "width": 560
+            "src": "static/images/cases/case8-1.jpg",
+            "height": 450
           }
         },
         {
           "type": "question",
           "data": {
-            "text": "Does the helmet to the left of the horse look black or white?"
+            "text": "Which machinery has the highest occupancy rate, according to the 'Occupancy Rate' diagram?\nOptions:\nA. Exavators\nB. Graders\nC. Cranes\nD. Telehandlers\nPlease select the correct answer from the options above."
           }
         },
         {
           "type": "thinking",
           "data": {
-            "text": "To determine the color of the helmet to the left of the horse, we need to focus on the specific area of the image where the helmet is located. Cropping and zooming are essential because they help isolate the helmet from other elements in the image, making it easier to discern its color.\n\n### Step 1: Initial Cropping\n\nThe goal is to zoom in on the area around the helmet. The first crop will encompass a larger region that includes the helmet and some surrounding elements. This will help us get a closer look at the helmet while retaining some context.",
+            "text": "The task is to identify which machinery has the highest occupancy rate based on the 'Occupancy Rate' diagram. The relevant section of the image is the bar chart labeled \"Machinery Rentals - Occupancy Rate.\" This chart displays the occupancy rates for different types of machinery, with percentages shown for each type. The bar chart clearly shows that Telehandlers have the highest occupancy rate at 72.2%, followed by Excavators at 78.8%, Bulldozers at 64.8%, Graders at 74.0%, and Cranes at 64.8%. Therefore, option D, Telehandlers, is the correct choice.",
+            "round": 1
+          }
+        },
+        {
+          "type": "answer",
+          "data": {
+            "text": "D. Telehandlers"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Failure Case 2",
+      "description": "Correct answer but inaccurate cropping",
+      "sections": [
+        {
+          "type": "image",
+          "data": {
+            "src": "static/images/cases/case9-1.jpg",
+            "height": 450
+          }
+        },
+        {
+          "type": "question",
+          "data": {
+            "text": "What is the model number of the train shown in the image?\nOptions:\nA. 4005\nB. 1002\nC. 3001\nD. 2001\nPlease select the correct answer from the options above."
+          }
+        },
+        {
+          "type": "thinking",
+          "data": {
+            "text": "The task is to identify the model number of the train shown in the image. The model number appears to be visible on the front of the train, near the bottom right corner of the train's front panel. The number is clearly visible as \"2001\". To ensure accuracy and confirm this observation, it would be beneficial to zoom in on this specific area of the image. Cropping the image around the train's front panel will help focus on the model number and eliminate any distractions from the surrounding environment.    The coordinates for cropping can be estimated based on the position of the train in the image. The relevant area is located towards the lower right part of the train's front panel. By cropping this section, we can zoom in on the model number for a clearer view.    Here is the Python code to crop and zoom in on the relevant area:",
             "round": 1
           }
         },
@@ -454,7 +485,7 @@
           "type": "code",
           "data": {
             "language": "python",
-            "code": "import cv2\nimport os\nimport numpy as np\nfrom uuid import uuid4\n\n# Load the image\nimage_path = \"/mnt/data/llava_sft/gqa/images/2326225.jpg\"\nimage = cv2.imread(image_path)\n\n# Perform the initial crop\ncropped_image = image[114:290, 0:218]\n\n# Save the cropped image with a random suffix\ntemp_dir = \"/mnt/data/temp_processed_images/\"\nrandom_suffix = str(uuid4())[:8]\nprocessed_filename = f\"cropped_{random_suffix}.jpg\"\nprocessed_path = os.path.join(temp_dir, processed_filename)\ncv2.imwrite(processed_path, cropped_image)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
+            "code": "import os\nimport random\nfrom PIL import Image\n\n# Load the image\nimage_path = \"hr_bench_4k/243.jpg\"\nimg = Image.open(image_path)\n\n# Define the cropping coordinates (x1, y1, x2, y2)\n# These coordinates are estimated based on the position of the train's front panel\nx1, y1, x2, y2 = 1600, 1900, 1900, 2200\n\n# Crop the image\ncropped_img = img.crop((x1, y1, x2, y2))\n\n# Save the cropped image with a random suffix\nrandom_suffix = random.randint(1000, 9999)\nfilename, ext = os.path.splitext(os.path.basename(image_path))\nprocessed_filename = f\"{filename}_{random_suffix}{ext}\"\nprocessed_path = os.path.join(\"/mnt/data/temp_processed_images/\", processed_filename)\ncropped_img.save(processed_path)\n\n# Print the path of the saved cropped image\nprint(processed_path)"
           }
         },
         {
@@ -462,8 +493,8 @@
           "data": {
             "images": [
               {
-                "src": "static/images/case10-2.png",
-                "width": 448
+                "src": "static/images/cases/case9-2.jpg",
+                "width": 250
               }
             ]
           }
@@ -471,39 +502,14 @@
         {
           "type": "thinking",
           "data": {
-            "text": "### Step 2: Analysis of the Initial Crop\n\nAfter the initial crop, the helmet is visible, but it is not the sole focus of the image. There are still other elements, such as the horse and parts of the cart, that could distract from analyzing the helmet's color. Therefore, a more focused crop is necessary.\n\n### Step 3: Further Cropping\n\nTo get a clearer view of the helmet, we will perform a second crop that focuses solely on the helmet. This will eliminate any distractions and make it easier to determine its color.",
+            "text": "The cropped image confirms that the model number of the train is indeed \"2001\". This matches option D from the given choices.",
             "round": 2
-          }
-        },
-        {
-          "type": "code",
-          "data": {
-            "language": "python",
-            "code": "# Load the initially cropped image\ninitial_cropped_path = processed_path\ninitial_cropped_image = cv2.imread(initial_cropped_path)\n\n# Perform the second, more focused crop on the helmet\nfocused_cropped_image = initial_cropped_image[72:105, 71:117]\n\n# Save the focused cropped image with a new random suffix\nfocused_filename = f\"focused_cropped_{random_suffix}.jpg\"\nfocused_path = os.path.join(temp_dir, focused_filename)\ncv2.imwrite(focused_path, focused_cropped_image)\n\n# Print the path of the focused cropped image\nprint(focused_path)"
-          }
-        },
-        {
-          "type": "generated_images",
-          "data": {
-            "images": [
-              {
-                "src": "static/images/case10-3.png",
-                "width": 448
-              }
-            ]
-          }
-        },
-        {
-          "type": "thinking",
-          "data": {
-            "text": "### Step 4: Final Analysis\n\nAfter the second crop, the helmet is now the central focus of the image. Observing the focused cropped image, the helmet appears to be white. The white color is distinct and contrasts with the darker elements surrounding it, confirming that the helmet to the left of the horse is indeed white.",
-            "round": 3
           }
         },
         {
           "type": "answer",
           "data": {
-            "text": "The helmet to the left of the horse appears to be white."
+            "text": "D. 2001"
           }
         }
       ]
